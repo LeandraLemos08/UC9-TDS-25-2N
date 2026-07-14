@@ -141,3 +141,8 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+/nbproject/private/
+/JavaApplication6/build/
+/JavaApplication6/nbproject/private/
+/JavaApplication3/nbproject/private/
+/JavaApplication3/build/
