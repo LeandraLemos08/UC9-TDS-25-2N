@@ -1,6 +1,6 @@
- CREATE TABLE aluno (
-  id SERIAL PRIMARY KEY,
-  nome VARCHAR(100) not null,
-  turma VARCHAR(50) not null,
-  email VARCHAR(50) not null
- )
+CREATE TABLE professor (
+  nome VARCHAR(80) NOT NULL,
+  cpf VARCHAR(11) NOT NULL UNIQUE,
+  telefone VARCHAR(15),
+  disciplina VARCHAR(50)
+)
