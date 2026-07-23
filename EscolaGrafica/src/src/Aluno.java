@@ -4,8 +4,61 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.sql.ResultSet;
 
 public class Aluno {
+    
+    private int id;
+    private String nome;
+    private String turma;
+    private String email;
+    
+    public Aluno(){
+    }
+    
+    public Aluno(int id, String nome, String turma, String email) {
+    
+        this.id = id;
+        this.nome = nome;
+        this.turma = turma;
+        this.email = email;
+    
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
     
   public boolean cadastrarAluno(String nome, String turma, String email){
     
@@ -31,14 +84,56 @@ public class Aluno {
           int linhas = stmt.executeUpdate();
           stmt.close();
           conexao.close();
+          return linhas > 0;
           
       } catch (SQLException erro) {
       
-          
-      
-      }
-      
-    }
+           System.out.println("Não foi possivel cadastrar este aluno.");
+           System.out.println(erro.getMessage());
+           return false;
+      } 
+     }
     
+   public ArrayList<Aluno> listar() {
+   
+       ArrayList<Aluno> lista = new ArrayList<>();
+       String sql = "SELECT * FROM aluno ORDER BY id";
+       
+       try{
+       
+           Connection conexao = Conexao.conectar();
+           
+           if (conexao == null) {
+           
+               return lista;
+               
+           }
+       
+           PreparedStatement stmt = conexao.prepareStatement(sql);
+           ResultSet resultado = stmt.executeQuery();
+           
+           while(resultado.next()){
+           
+               Aluno aluno = new Aluno();
+               aluno.setId(resultado.getInt(id));
+               aluno.setNome(resultado.getString(nome));
+               aluno.setTurma(resultado.getString(turma));
+               aluno.setEmail(resultado.getString(email));
+               
+               lista.add(aluno);
+           }
+           
+           resultado.close();
+           stmt.close();
+           conexao.close();
+           
+       } catch(SQLException erro){
+           
+           System.out.println("Erro ao listar alunos");
+           System.out.println(erro.getMessage());
+       }
+       
+       return lista;
+   }
     
 }
