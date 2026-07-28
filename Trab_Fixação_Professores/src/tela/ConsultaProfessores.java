@@ -111,7 +111,7 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
 
         btnAlterar = new javax.swing.JButton();
@@ -131,24 +131,24 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAlterar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); // NOI18N
+        btnAlterar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); 
         btnAlterar.setText("Alterar");
         btnAlterar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtEmail.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "E-mail do Professor:"));
 
-        btnEExcluir.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); // NOI18N
+        btnEExcluir.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); 
         btnEExcluir.setText("Excluir");
         btnEExcluir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnLimpar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); // NOI18N
+        btnLimpar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); 
         btnLimpar.setText("Limpar");
         btnLimpar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Gabriola", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Gabriola", 1, 36)); 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Consulta de Professores");
@@ -167,7 +167,7 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        btnFechar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); // NOI18N
+        btnFechar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 18)); 
         btnFechar.setText("Fechar");
         btnFechar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -256,7 +256,7 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
   
     public static void main(String args[]) {
@@ -264,7 +264,7 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
         java.awt.EventQueue.invokeLater(() -> new ConsultaProfessores().setVisible(true));
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnEExcluir;
     private javax.swing.JButton btnFechar;
@@ -279,5 +279,5 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
-    // End of variables declaration//GEN-END:variables
+    
 }
