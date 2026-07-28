@@ -37,10 +37,10 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
         String idTexto = txtId.getText().trim();
 
         if (idTexto.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Digite um ID para localizar.",
                     "Aviso",
-                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -48,10 +48,10 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
         try {
             id = Integer.parseInt(idTexto);
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "O campo ID deve conter apenas números.",
                     "ID inválido",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -64,7 +64,7 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
             txtEmail.setText(encontrado.getEmail());
             txtTelefone.setText(encontrado.getTelefone());
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Nenhum professor encontrado com o ID informado.",
                     "Não encontrado",
                     javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -76,17 +76,17 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
     }
      
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {
-        javax.swing.JOptionPane.showMessageDialog(this,
+        JOptionPane.showMessageDialog(this,
                 "Função de alteração será desenvolvida na próxima etapa.",
                 "Em desenvolvimento",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        javax.swing.JOptionPane.showMessageDialog(this,
+        JOptionPane.showMessageDialog(this,
                 "Função de exclusão será desenvolvida na próxima etapa.",
                 "Em desenvolvimento",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {
