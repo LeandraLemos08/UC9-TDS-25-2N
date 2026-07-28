@@ -118,7 +118,7 @@ public class Professores {
 
    
     public Professores localizarPorId(int id) {
-        String sql = "SELECT id, nome, disciplina, email, telefone FROM professor WHERE id = ?";
+        String sql = "SELECT * FROM Professores WHERE id = ?";
 
         try (Connection con = Conexao.conectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
