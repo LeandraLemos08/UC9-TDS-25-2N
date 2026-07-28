@@ -88,11 +88,14 @@ public class Professores {
             System.out.println("Erro ao cadastrar professor: " + error.getMessage());
             return false;
         }
+
+        con.close();
+        stmt.close();
     }
 
-    public List<Professores> listar() {
-        List<Professores> professores = new ArrayList<>();
-        String sql = "SELECT id, nome, disciplina, email, telefone FROM professor ORDER BY id";
+    public ArrayList<Professores> listar() {
+        ArrayList<Professores> professores = new ArrayList<>();
+        String sql = "SELECT * FROM professor ORDER BY id";
 
         try (Connection con = Conexao.conectar();
              PreparedStatement stmt = con.prepareStatement(sql);
@@ -109,6 +112,10 @@ public class Professores {
                 professores.add(p);
             }
 
+           rs.close();
+           stmt.close();
+           con.close();
+            
         } catch (SQLException error) {
             System.out.println("Erro ao listar professores: " + error.getMessage());
         }
@@ -120,22 +127,28 @@ public class Professores {
     public Professores localizarPorId(int id) {
         String sql = "SELECT * FROM Professores WHERE id = ?";
 
-        try (Connection con = Conexao.conectar();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new Professores(
-                            rs.getInt("id"),
-                            rs.getString("nome"),
-                            rs.getString("disciplina"),
-                            rs.getString("email"),
-                            rs.getString("telefone")
-                    );
-                }
-            }
+          Connection conexao = Conexao.conectar();
+           if(conexao == null ){
+           return null;
+           }
+           
+           PreparedStatement stmt = conexao.prepareStatement(sql);
+           stmt.setInt(1, id);
+           
+           ResultSet resultado = stmt.executeQuery();
+        
+         if(resultado.next()){
+            Professores professor = new Professores();
+            professor.setId(resultado.getInt(id));
+            professor.setNome(resultado.getString("Nome"));
+            professor.setDisciplina(resultado.getString("disciplina"));
+            professor.setEmail(resultado.getString("email"));
+            professor.setTelefone(resultado.getString("telefone"));
+           }
+           
+           resultado.close();
+           stmt.close();
+           conexao.close();
 
         } catch (SQLException error) {
             System.out.println("Erro ao localizar professor: " + error.getMessage());
