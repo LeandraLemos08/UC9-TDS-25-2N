@@ -15,7 +15,6 @@ public class CadastroProfessores extends javax.swing.JFrame {
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         txtEmail = new javax.swing.JTextField();
@@ -35,21 +34,21 @@ public class CadastroProfessores extends javax.swing.JFrame {
 
         txtTelefone.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Telefone do Professor:"));
 
-        btnCadastrar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); // NOI18N
+        btnCadastrar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCadastrar.addActionListener(this::btnCadastrarActionPerformed);
 
-        btnLimpar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); // NOI18N
+        btnLimpar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); 
         btnLimpar.setText("Limpar");
         btnLimpar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnConsultar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); // NOI18N
+        btnConsultar.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); 
         btnConsultar.setText("Consultar");
         btnConsultar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
-        btnSair.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14)); // NOI18N
+        btnSair.setFont(new java.awt.Font("Malgun Gothic Semilight", 1, 14));
         btnSair.setText("Sair");
         btnSair.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSair.addActionListener(this::btnSairActionPerformed);
@@ -57,7 +56,7 @@ public class CadastroProfessores extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         lbCadastroProfessores.setBackground(new java.awt.Color(255, 255, 255));
-        lbCadastroProfessores.setFont(new java.awt.Font("Gabriola", 1, 36)); // NOI18N
+        lbCadastroProfessores.setFont(new java.awt.Font("Gabriola", 1, 36));
         lbCadastroProfessores.setForeground(new java.awt.Color(255, 255, 255));
         lbCadastroProfessores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbCadastroProfessores.setText("Cadastro de Professores");
@@ -127,9 +126,9 @@ public class CadastroProfessores extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {
 
         String nome = txtNome.getText().trim();
         String disciplina = txtDisciplina.getText().trim();
@@ -164,7 +163,7 @@ public class CadastroProfessores extends javax.swing.JFrame {
                 "Erro",
                 JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }
 
      private void limparCampos() {
     txtNome.setText("");
@@ -174,13 +173,13 @@ public class CadastroProfessores extends javax.swing.JFrame {
     txtNome.requestFocus();
 }
     
-    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {
         ConsultaProfessores tela = new ConsultaProfessores();
         tela.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnConsultarActionPerformed
+    }
 
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {
         int opcao = JOptionPane.showConfirmDialog(this,
             "Deseja realmente sair?",
             "Confirmar saída.",
@@ -189,7 +188,7 @@ public class CadastroProfessores extends javax.swing.JFrame {
             dispose();
             System.exit(0);
         }
-    }//GEN-LAST:event_btnSairActionPerformed
+    }
 
     
     public static void main(String args[]) {
@@ -197,7 +196,7 @@ public class CadastroProfessores extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new CadastroProfessores().setVisible(true));
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnLimpar;
@@ -208,5 +207,5 @@ public class CadastroProfessores extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
-    // End of variables declaration//GEN-END:variables
+   
 }
