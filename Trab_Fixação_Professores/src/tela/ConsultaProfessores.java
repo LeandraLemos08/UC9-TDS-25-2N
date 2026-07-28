@@ -7,23 +7,31 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
  
     private javax.swing.table.DefaultTableModel modelo;
     
-    private void carregarTabela() {
-        modelo = (javax.swing.table.DefaultTableModel) tabelaProfessores.getModel();
-        modelo.setRowCount(0);
-
-        Professores professor = new Professores();
-        java.util.List<Professores> professores = professor.listar();
-
-        for (Professores p : professores) {
-            modelo.addRow(new Object[]{
-                p.getId(),
-                p.getNome(),
-                p.getDisciplina(),
-                p.getEmail(),
-                p.getTelefone()
-            });
-        }
-    }
+    private void carregarTabela(){
+   
+   DefaultTableModel modelo = new DefaultTableModel();
+   modelo.addColumn("ID");
+   modelo.addColumn("Nome");
+   modelo.addColumn("Disciplina");
+   modelo.addColumn("E-mail");
+   modelo.addColumn("Telefone");
+       
+   Professores professor = new Professores();
+   
+   ArrayList<Professores> lista = professor.listar();
+   
+   
+   for (Professores p : lista) {
+   
+        modelo.addRow(new Object[]{
+        p.getId(),
+        p.getNome(),
+        p.getDisciplina(),
+        p.getEmail(),
+        p.getTelefone()
+      });
+       tabelaProfessores.setModel(modelo);
+   }
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {
         String idTexto = txtId.getText().trim();
