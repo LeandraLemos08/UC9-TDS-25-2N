@@ -172,6 +172,12 @@ public class CadastroProfessores extends javax.swing.JFrame {
     txtTelefone.setText("");
     txtNome.requestFocus();
 }
+     private void ativarCampos() {
+    txtNome.setEnabled(true);
+    txtDisciplina.setEnabled(true);
+    txtEmail.setEnabled(true);
+    txtTelefone.setEnabled(true);
+}
     
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {
         ConsultaProfessores tela = new ConsultaProfessores();
