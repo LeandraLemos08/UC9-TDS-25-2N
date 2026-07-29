@@ -34,46 +34,34 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
    }
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {
-        String idTexto = txtId.getText().trim();
-
-        if (idTexto.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "Digite um ID para localizar.",
-                    "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
+       
+     if(txtId.getText().trim().isEmpty()) {
+         JOptionPane.showMessageDialog(this, "Digite o Id do professor.");
+         return;
         }
-
-        int id;
+        
         try {
-            id = Integer.parseInt(idTexto);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this,
-                    "O campo ID deve conter apenas números.",
-                    "ID inválido",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Professores professor = new Professores();
-        Professores encontrado = professor.localizarPorId(id);
-
-        if (encontrado != null) {
-            txtNome.setText(encontrado.getNome());
-            txtDisciplina.setText(encontrado.getDisciplina());
-            txtEmail.setText(encontrado.getEmail());
-            txtTelefone.setText(encontrado.getTelefone());
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Nenhum professor encontrado com o ID informado.",
-                    "Não encontrado",
-                    javax.swing.JOptionPane.WARNING_MESSAGE);
-            txtNome.setText("");
-            txtDisciplina.setText("");
-            txtEmail.setText("");
-            txtTelefone.setText("");
-        }
-    }
+                int id = Integer.parseInt(txtID.getText().trim());
+                Professores professor = new Professores();
+                
+                Professores encontrado = aluno.localizarPorId(id);
+                
+                if(encontrado != null){
+                txtNome.setText(encontrado.getNome());
+                txtDisciplina.setText(encontrado.getD());
+                txtEmail.setText(encontrado.getEmail());
+                txtTelefone.setText(encontrado.getTelefone());
+                }
+                
+                JOptionPane.showMessageDialog(this, "Professor localizado com sucesso.");
+                        } else { 
+                    JOptionPane.showMessageDialog(this, "Professor não encontrado.");
+                }}
+                 catch (NumberFormatException erro) {
+                        JOptionPane.showMessageDialog(this, "Digite um id númerico válido.");
+                }
+    }         
+                  
      
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {
         JOptionPane.showMessageDialog(this,
