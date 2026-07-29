@@ -60,6 +60,7 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
                  catch (NumberFormatException erro) {
                         JOptionPane.showMessageDialog(this, "Digite um id númerico válido.");
                   limparCampos();
+                  ativarcampos();
                 }
     }         
                   
