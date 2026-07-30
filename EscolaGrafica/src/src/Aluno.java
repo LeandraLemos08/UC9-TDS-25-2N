@@ -121,19 +121,115 @@ public class Aluno {
                aluno.setEmail(resultado.getString(email));
                
                lista.add(aluno);
-           }
+}
            
            resultado.close();
            stmt.close();
            conexao.close();
            
-       } catch(SQLException erro){
+}     catch(SQLException erro){
            
            System.out.println("Erro ao listar alunos");
            System.out.println(erro.getMessage());
-       }
+}
        
        return lista;
-   }
-    
 }
+    
+   
+   public Aluno buscarPorId(int id){
+   
+       String sql = "SELECT * FROM Aluno WHERE id = ?";
+       
+       try {
+       
+           Connection conexao = Conexao.conectar();
+           if(conexao == null ){
+           return null;
+}
+           
+           PreparedStatement stmt = conexao.prepareStatement(sql);
+           stmt.setInt(1, id);
+           
+           ResultSet resultado = stmt.executeQuery();
+           
+           if(resultado.next()){
+            Aluno aluno = new Aluno();
+            aluno.setId(resultado.getInt(id));
+            aluno.setNome(resultado.getString("Nome"));
+            aluno.setTurma(resultado.getString("turma"));
+            aluno.setEmail(resultado.getString("email"));
+           
+           
+           resultado.close();
+           stmt.close();
+           conexao.close();
+           
+           return aluno;
+           
+}
+           
+}    catch (SQLException error) {
+     System.out.println("Erro ao buscar aluno" + error.getMessage());
+            
+}
+
+       return null;
+   
+}
+   
+   public boolean alterar(int id, String nome, String turma, String email){
+    String sql = "UPDATE aluno"
+                 + "SET nome = ?, turma = ?, email = ? "
+                 + "WHERE id = ? "
+            ;
+    try {
+     Connection con = Conexao.conectar();
+     if (con == null){
+     return false;
+}
+     
+     PreparedStatement stmt = con.prepareStatement(sql);
+     stmt.setString(1, nome);
+     stmt.setString(2, turma);
+     stmt.setString(3, email);
+     stmt.setInt(4, id);
+     
+     int linhasAlteradas = stmt.executeUpdate();
+     stmt.close();
+     con.close();
+     return linhasAlteradas > 0;
+ }
+    catch (SQLException error) {
+         System.out.println("Erro ao alterar aluno!" + error.getMessage());
+ } 
+    return false;
+ }
+   
+   public boolean excluir(int id){
+      String sql = "DELETE FROM aluno WHERE id = ? "
+              ;
+       try {
+     Connection con = Conexao.conectar();
+     if (con == null){
+     return false;
+     }
+       PreparedStatement stmt = con.prepareStatement(sql);
+       stmt.setInt(1, id);
+       
+       int linhasExcluidas = stmt.executeUpdate();
+       
+       stmt.close();
+       con.close();
+       
+       return linhasExcluidas > 0;
+       
+  }   catch(SQLException error){
+        System.out.println("Erro ao excluir o aluno." + error.getMessage());
+  }
+ 
+       return false;
+   
+   }
+   
+ }

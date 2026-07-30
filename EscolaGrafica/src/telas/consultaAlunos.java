@@ -1,12 +1,13 @@
 package telas;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import src.Aluno;
 import javax.swing.table.DefaultTableModel;
 
 
-public class consultaAluno extends javax.swing.JFrame {
+public class consultaAlunos extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(consultaAluno.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(consultaAlunos.class.getName());
 
    private void carregarTabela(){
    
@@ -23,22 +24,58 @@ public class consultaAluno extends javax.swing.JFrame {
    
    for (Aluno item: lista) {
    
-        modelo.addRow(new Objects[]){
-        item.getId();
-        item.getNome();
-        item.getTurma();
-        item.getEmail();
-   }
+        modelo.addRow(new Object[]{
+        item.getId(),
+        item.getNome(),
+        item.getTurma(),
+        item.getEmail()
+      });
        tabelaAlunos.setModel(modelo);
    }
    
    }
     
-    public consultaAluno() {
+   
+   private void desativarCampos(){
+   
+       txtNome.setEnabled(false);
+       txtEmail.setEnabled(false);
+       txtTurma.setEnabled(false);
+       
+       bntAlterar.setEnabled(false);
+       bntExcluir.setEnabled(false);
+       
+   }
+   
+    private void ativarCampos(){
+   
+       txtNome.setEnabled(true);
+       txtEmail.setEnabled(true);
+       txtTurma.setEnabled(true);
+       
+       bntAlterar.setEnabled(true);
+       bntExcluir.setEnabled(true);
+       
+   }
+   
+    public consultaAlunos() {
         initComponents();
         carregarTabela();
+        limparCampos();
     }
 
+    private void limparCampos(){
+    
+    txtID.setText("");
+    txtNome.setText("");
+    txtTurma.setText("");
+    txtEmail.setText("");
+    
+    txtID.requestFocus();
+    }
+    
+    
+    
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,11 +86,11 @@ public class consultaAluno extends javax.swing.JFrame {
         txtTurma = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         btnLocalizar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        bntAlterar = new javax.swing.JButton();
+        bntExcluir = new javax.swing.JButton();
+        bntAtualizar = new javax.swing.JButton();
+        bntLimpar = new javax.swing.JButton();
+        bntFechar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaAlunos = new javax.swing.JTable();
 
@@ -74,17 +111,19 @@ public class consultaAluno extends javax.swing.JFrame {
         txtEmail.addActionListener(this::txtEmailActionPerformed);
 
         btnLocalizar.setText("🔎 Localizar");
+        btnLocalizar.addActionListener(this::btnLocalizarActionPerformed);
 
-        btnEditar.setText("🎨 Editar");
+        bntAlterar.setText("🎨 Alterar");
+        bntAlterar.addActionListener(this::bntAlterarActionPerformed);
 
-        jButton3.setText("❌ Excluir");
+        bntExcluir.setText("❌ Excluir");
 
-        jButton4.setText("🔄️ Atualizar");
+        bntAtualizar.setText("🔄️ Atualizar");
 
-        jButton6.setText("🚮 Limpar");
+        bntLimpar.setText("🚮 Limpar");
 
-        jButton7.setText("🔐 Fechar");
-        jButton7.addActionListener(this::jButton7ActionPerformed);
+        bntFechar.setText("🔐 Fechar");
+        bntFechar.addActionListener(this::bntFecharActionPerformed);
 
         tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,15 +163,15 @@ public class consultaAluno extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(btnEditar)
+                        .addComponent(bntAlterar)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton3)
+                        .addComponent(bntExcluir)
                         .addGap(29, 29, 29)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(jButton6)
+                        .addComponent(bntAtualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(bntLimpar)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton7)
+                        .addComponent(bntFechar)
                         .addGap(41, 41, 41))))
             .addComponent(jScrollPane1)
         );
@@ -151,11 +190,11 @@ public class consultaAluno extends javax.swing.JFrame {
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(bntAlterar)
+                    .addComponent(bntExcluir)
+                    .addComponent(bntAtualizar)
+                    .addComponent(bntLimpar)
+                    .addComponent(bntFechar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -172,20 +211,80 @@ public class consultaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void txtTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTurmaActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtTurmaActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void bntFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFecharActionPerformed
+       
+    }//GEN-LAST:event_bntFecharActionPerformed
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_tabelaAlunosMouseClicked
+
+    private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
+        if (txtID.getText().trim().isEmpty() || txtNome.getText().trim().isEmpty() 
+            || txtTurma.getText().trim().isEmpty() || txtEmail.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+        return;
+    }
+        int rp = JOptionPane.showConfirmDialog(this,
+                "Realmente deseja alterar os dados deste aluno?",
+                "Confirmação da Alteração dos Dados.",
+                JOptionPane.YES_NO_CANCEL_OPTION);
+        if (rp != JOptionPane.YES_OPTION){
+        return;
+    }
+       int id = Integer.parseInt(txtID.getText().trim());
+       String nome = txtNome.getText().trim();
+       String turma = txtTurma.getText().trim();
+       String email = txtEmail.getText().trim();
+       
+       Aluno aluno = new Aluno();
+       
+       boolean alterado = aluno.alterar(id, nome, turma, email);
+       if (alterado) {
+          JOptionPane.showMessageDialog(this, "Aluno alterado com sucesso!");
+          carregarTabela();
+          limparCampos();
+    } else {
+     JOptionPane.showMessageDialog(this, "Não foi possivel alterar o aluno.");
+    }
+       
+       
+    }//GEN-LAST:event_bntAlterarActionPerformed
+
+    private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
+        if(txtID.getText().trim().isEmpty()) {
+         JOptionPane.showMessageDialog(this, "Digite o ID do aluno.");
+         return;
+        }
+        
+        try {
+                int id = Integer.parseInt(txtID.getText().trim());
+                Aluno aluno = new Aluno();
+                
+                Aluno encontrado = aluno.buscarPorId(id);
+                
+                if(encontrado != null){
+                txtNome.setText(encontrado.getNome());
+                txtTurma.setText(encontrado.getTurma());
+                txtEmail.setText(encontrado.getEmail());
+                
+                JOptionPane.showMessageDialog(this, "Aluno localizado com sucesso.");
+                } else { 
+                    JOptionPane.showMessageDialog(this, "Aluno não encontrado.");
+                }}
+                 catch (NumberFormatException erro) {
+                        JOptionPane.showMessageDialog(this, "Digite um id númerico válido.");
+                limparCampos();
+                ativarCampos();
+                }
+    }//GEN-LAST:event_btnLocalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,17 +308,17 @@ public class consultaAluno extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new consultaAluno().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new consultaAlunos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton bntAlterar;
+    private javax.swing.JButton bntAtualizar;
+    private javax.swing.JButton bntExcluir;
+    private javax.swing.JButton bntFechar;
+    private javax.swing.JButton bntLimpar;
     private javax.swing.JButton btnLocalizar;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaAlunos;
     private javax.swing.JTextField txtEmail;
