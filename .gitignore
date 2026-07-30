@@ -147,4 +147,9 @@ vite.config.ts.timestamp-*
 /JavaApplication3/nbproject/private/
 /JavaApplication3/build/
 /EscolaGrafica/nbproject/private/
+<<<<<<< HEAD
 /EscolaGrafica/build/
+=======
+/Trab_Fixação_Professores/nbproject/private/
+/Trab_Fixação_Professores/build/
+>>>>>>> 296b83b41818ecc4a3af1abae458ea66371ceec5
