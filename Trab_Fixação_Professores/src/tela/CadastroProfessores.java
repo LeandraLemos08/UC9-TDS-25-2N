@@ -11,10 +11,23 @@ public class CadastroProfessores extends javax.swing.JFrame {
 
     public CadastroProfessores() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Sistema de Cadastro de Professores");
     }
 
 
     @SuppressWarnings("unchecked")
+
+    private void limparCampos(){
+   
+    txtNome.setText("");
+    txtDisciplina.setText("");
+    txtEmail.setText("");
+    txtTelefone.setText("");
+    
+    }
+    
     private void initComponents() {
 
         txtEmail = new javax.swing.JTextField();
@@ -165,13 +178,6 @@ public class CadastroProfessores extends javax.swing.JFrame {
         }
     }
 
-     private void limparCampos() {
-    txtNome.setText("");
-    txtDisciplina.setText("");
-    txtEmail.setText("");
-    txtTelefone.setText("");
-    txtNome.requestFocus();
-}
      private void ativarCampos() {
     txtNome.setEnabled(true);
     txtDisciplina.setEnabled(true);
@@ -192,7 +198,6 @@ public class CadastroProfessores extends javax.swing.JFrame {
             JOptionPane.YES_NO_CANCEL_OPTION);
         if(opcao == JOptionPane.YES_OPTION){
             dispose();
-            System.exit(0);
         }
     }
 
