@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.sql.DriverManager;
 
 public class Professores {
 
@@ -82,15 +82,14 @@ public class Professores {
             stmt.setString(4, this.telefone);
 
             int linhasAfetadas = stmt.executeUpdate();
+            stmt.close();
+            con.close();
             return linhasAfetadas > 0;
 
         } catch (SQLException error) {
             System.out.println("Erro ao cadastrar professor: " + error.getMessage());
             return false;
         }
-
-        con.close();
-        stmt.close();
     }
 
     public ArrayList<Professores> listar() {

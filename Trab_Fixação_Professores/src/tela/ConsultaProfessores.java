@@ -1,11 +1,13 @@
 
 package tela;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import src.Professores;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsultaProfessores extends javax.swing.JInternalFrame {
- 
-    private javax.swing.table.DefaultTableModel modelo;
+
+     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ConsultaProfessores.class.getName());
     
     private void carregarTabela(){
    
@@ -20,7 +22,6 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
    
    ArrayList<Professores> lista = professor.listar();
    
-   
    for (Professores p : lista) {
    
         modelo.addRow(new Object[]{
@@ -33,6 +34,41 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
        tabelaProfessores.setModel(modelo);
    }
 
+      private void desativarCampos(){
+   
+       txtNome.setEnabled(false);
+       txtDisciplina.setEnabled(false);
+       txtEmail.setEnabled(false);
+       txtTelefone.setEnabled(false);
+
+       bntAlterar.setEnabled(false);
+       bntExcluir.setEnabled(false);
+       
+   }
+
+     private void ativarCampos(){
+   
+       txtNome.setEnabled(true);
+       txtDisciplina.setEnabled(true);
+       txtemail.setEnabled(true);
+       txtTelefone.setEnabled(true);
+      
+       bntAlterar.setEnabled(true);
+       bntExcluir.setEnabled(true);
+       
+   }
+
+  private void limparCampos(){
+    
+    txtId.setText("");
+    txtNome.setText("");
+    txtDisciplina.setText("");
+    txtEmail.setText("");
+    txtTelefone.setText("");
+
+    txtId.requestFocus();
+    }
+     
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {
        
      if(txtId.getText().trim().isEmpty()) {
@@ -106,6 +142,8 @@ public class ConsultaProfessores extends javax.swing.JInternalFrame {
     
     public ConsultaProfessores() {
         initComponents();
+        carregarTabela();
+        limparCampos();
     }
 
     @SuppressWarnings("unchecked")

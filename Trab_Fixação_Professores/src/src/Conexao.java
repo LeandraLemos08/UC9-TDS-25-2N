@@ -9,28 +9,28 @@ import java.sql.SQLException;
 public class Conexao {
     
     public static Connection conectar() {
-       Connection conexao = null;
+    
+    private static final String URL = "jdbc:postgresql://localhost/Trab_Fixação_professores";
+    private static final String USUARIO = "postgres";
+    private static final String SENHA = "root";
+    
+ public static Connection conectar() {
+    
+    try {
        
-       String url = "jdbc:postgresql://localhost:2007/escolaGrafica";
-        String usuario = "postgres";
-        String senha = "root";
+       Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
+       System.out.println("Conexão realizada com sucesso!");
+       return conexao;
+       
+    } catch (SQLException erro) {
+    
+        System.out.println("Erro ao conectar com o Banco.");
+        System.out.println(erro.getMessage());
+        return null;
         
-         try {
-            conexao = DriverManager.getConnection(url, usuario, senha);
-            System.out.println("Conexao realizada com sucesso!");
-      
-        } catch (SQLException erro) {
-            System.out.println("Erro ao conectar.");
-            System.out.println(erro.getMessage());
-        }
-        
-      return conexao;  
     }
-
-
-
-
-
+ }
+    }
 
 }
     
