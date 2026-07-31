@@ -117,6 +117,7 @@ public class consultaAlunos extends javax.swing.JFrame {
         bntAlterar.addActionListener(this::bntAlterarActionPerformed);
 
         bntExcluir.setText("❌ Excluir");
+        bntExcluir.addActionListener(this::bntExcluirActionPerformed);
 
         bntAtualizar.setText("🔄️ Atualizar");
 
@@ -285,6 +286,39 @@ public class consultaAlunos extends javax.swing.JFrame {
                 ativarCampos();
                 }
     }//GEN-LAST:event_btnLocalizarActionPerformed
+
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        if (txtID.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(this, "Preencha o campo ID!");
+         return;
+        }
+       
+        int rs = JOptionPane.showConfirmDialog
+                (this,
+                "Deseja realmente excluir esse aluno?",
+                "Confirmação.",
+                JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if(rs != JOptionPane.YES_OPTION){
+        return;
+        } 
+        
+        int id = Integer.parseInt(txtID.getText().trim());
+       
+        Aluno aluno = new Aluno();
+        
+        boolean excluido = aluno.excluir(id);
+        
+        if (excluido) {
+         JOptionPane.showMessageDialog(this, "Aluno excluído com sucesso!");
+         carregarTabela();
+         limparCampos();
+         desativarCampos();
+        } else {
+         JOptionPane.showMessageDialog(this, "Não foi possível excluir o aluno.");
+        }
+        
+    }//GEN-LAST:event_bntExcluirActionPerformed
 
     /**
      * @param args the command line arguments
