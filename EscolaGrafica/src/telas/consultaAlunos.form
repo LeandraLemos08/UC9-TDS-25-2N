@@ -187,6 +187,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="\ud83d\udd04&#xfe0f; Atualizar" containsInvalidXMLChars="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntAtualizarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntLimpar">
       <Properties>

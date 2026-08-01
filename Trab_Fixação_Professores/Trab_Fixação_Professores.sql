@@ -1,1 +1,0 @@
-SELECT * FROM professor ORDER BY idws
