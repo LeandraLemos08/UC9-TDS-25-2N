@@ -195,6 +195,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="\ud83d\udeae Limpar" containsInvalidXMLChars="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntLimparActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bntFechar">
       <Properties>

@@ -123,6 +123,7 @@ public class consultaAlunos extends javax.swing.JFrame {
         bntAtualizar.addActionListener(this::bntAtualizarActionPerformed);
 
         bntLimpar.setText("🚮 Limpar");
+        bntLimpar.addActionListener(this::bntLimparActionPerformed);
 
         bntFechar.setText("🔐 Fechar");
         bntFechar.addActionListener(this::bntFecharActionPerformed);
@@ -323,9 +324,16 @@ public class consultaAlunos extends javax.swing.JFrame {
 
     private void bntAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarActionPerformed
        carregarTabela();
+       limparCampos();
+       desativarCampos();
        JOptionPane.showMessageDialog(this, 
                "Tabela atualizada com sucesso!");
     }//GEN-LAST:event_bntAtualizarActionPerformed
+
+    private void bntLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLimparActionPerformed
+        limparCampos();
+        desativarCampos();
+    }//GEN-LAST:event_bntLimparActionPerformed
 
    
     public static void main(String args[]) {
