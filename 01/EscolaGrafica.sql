@@ -1,9 +1,16 @@
-CREATE TABLE aluno (
+Create Table Aluno (
+  id SERIAL PRIMARY KEY NOT NULL,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  turma VARCHAR(100) NOT NULL
+);
 
-	id SERIAL PRIMARY KEY,
-	nome VARCHAR(100) NOT NULL,
-	turma VARCHAR(20) NOT NULL,
-	email VARCHAR(20) UNIQUE
+SELECT * FROM Aluno ORDER BY id
+
+CREATE TABLE Professores (
+ id SERIAL PRIMARY KEY NOT NULL UNIQUE,
+ nome VARCHAR(100) NOT NULL,
+ disciplina VARCHAR(100),
+ email VARCHAR(100) NOT NULL,
+ telefone VARCHAR(100)
 )
-
-select * from aluno
