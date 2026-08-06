@@ -90,6 +90,7 @@ public class Principal extends javax.swing.JFrame {
 
         bntConsultar.setText("Consultar?");
         bntConsultar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bntConsultar.addActionListener(this::bntConsultarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,10 +190,12 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
-   private void bntConsultarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void bntConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConsultarActionPerformed
         consultaAlunos tela = new consultaAlunos();
-        tela.setVisible(true);
-    }
+        tela.setVisible(true);   
+    }//GEN-LAST:event_bntConsultarActionPerformed
+
+ 
    
     public static void main(String args[]) {
      
