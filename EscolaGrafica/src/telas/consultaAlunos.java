@@ -147,6 +147,8 @@ public class consultaAlunos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaAlunos);
 
+        cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "Turma", "E-mail" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

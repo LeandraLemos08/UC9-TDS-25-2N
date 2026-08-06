@@ -198,7 +198,7 @@ public class Aluno {
                 sql = """
                       SELECT id, nome, turma, email FROM aluno
                       WHERE nome ILIKE ?
-                      OREDER BY turma, nome
+                      ORDER BY turma, nome
                       """;
                 break;
             case "Turma":
@@ -209,7 +209,7 @@ public class Aluno {
                       """;
             break ;
             
-            case "Email":
+            case "E-mail":
                 sql = """
                       SELECT id, nome, turma, email FROM aluno
                       WHERE email ILIKE ?

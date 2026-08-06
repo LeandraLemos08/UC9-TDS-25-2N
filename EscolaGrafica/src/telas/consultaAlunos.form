@@ -249,7 +249,12 @@
     <Component class="javax.swing.JComboBox" name="cbTipoConsulta">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="4">
+            <StringItem index="0" value="ID"/>
+            <StringItem index="1" value="Nome"/>
+            <StringItem index="2" value="Turma"/>
+            <StringItem index="3" value="E-mail"/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>
