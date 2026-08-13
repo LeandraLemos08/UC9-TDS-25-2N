@@ -30,11 +30,15 @@ public class consultaAlunos extends javax.swing.JFrame {
         item.getTurma(),
         item.getEmail()
       });
-       tabelaAlunos.setModel(modelo);
    }
-   
+    tabelaAlunos.setModel(modelo);
    }
     
+   private void limparPesquisa(){
+    txtID.setText("");
+    cbTipoConsulta.setSelectedIndex(-1);
+    txtID.requestFocus();
+   }
    
    private void desativarCampos(){
    
@@ -94,11 +98,13 @@ public class consultaAlunos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaAlunos = new javax.swing.JTable();
         cbTipoConsulta = new javax.swing.JComboBox<>();
+        bntCarrregar = new javax.swing.JButton();
 
         jButton5.setText("jButton5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtID.setToolTipText("");
         txtID.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Localizar:"));
         txtID.addActionListener(this::txtIDActionPerformed);
 
@@ -148,6 +154,11 @@ public class consultaAlunos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaAlunos);
 
         cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "Turma", "E-mail" }));
+        cbTipoConsulta.setSelectedIndex(-1);
+        cbTipoConsulta.addActionListener(this::cbTipoConsultaActionPerformed);
+
+        bntCarrregar.setText("🌀 Recarregar");
+        bntCarrregar.addActionListener(this::bntCarrregarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,6 +167,20 @@ public class consultaAlunos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(bntAlterar)
+                        .addGap(28, 28, 28)
+                        .addComponent(bntExcluir)
+                        .addGap(29, 29, 29)
+                        .addComponent(bntAtualizar)
+                        .addGap(32, 32, 32)
+                        .addComponent(bntCarrregar)
+                        .addGap(26, 26, 26)
+                        .addComponent(bntLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(bntFechar)
+                        .addGap(41, 41, 41))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,39 +191,25 @@ public class consultaAlunos extends javax.swing.JFrame {
                                 .addComponent(cbTipoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnLocalizar)))
-                        .addContainerGap(87, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(bntAlterar)
-                        .addGap(28, 28, 28)
-                        .addComponent(bntExcluir)
-                        .addGap(29, 29, 29)
-                        .addComponent(bntAtualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(bntLimpar)
-                        .addGap(38, 38, 38)
-                        .addComponent(bntFechar)
-                        .addGap(41, 41, 41))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(cbTipoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addComponent(btnLocalizar)
-                        .addGap(18, 18, 18)))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbTipoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)))
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,9 +221,10 @@ public class consultaAlunos extends javax.swing.JFrame {
                     .addComponent(bntExcluir)
                     .addComponent(bntAtualizar)
                     .addComponent(bntLimpar)
-                    .addComponent(bntFechar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntFechar)
+                    .addComponent(bntCarrregar))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -327,7 +339,8 @@ public class consultaAlunos extends javax.swing.JFrame {
       }
          
       JOptionPane.showMessageDialog(this, lista.size() + "Aluno(s) encontrados.", "Consulta Concluída", JOptionPane.INFORMATION_MESSAGE);
-      
+     
+      preencherTabela(lista);
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
@@ -377,8 +390,33 @@ public class consultaAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_bntLimparActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
+      btnLocalizar.doClick();
     }//GEN-LAST:event_txtIDActionPerformed
+
+    private void bntCarrregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCarrregarActionPerformed
+       Aluno aluno = new Aluno();
+       
+       ArrayList<Aluno> lista = aluno.listar();
+       
+       preencherTabela(lista);
+       
+       limparPesquisa();
+       
+    }//GEN-LAST:event_bntCarrregarActionPerformed
+
+    private void cbTipoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoConsultaActionPerformed
+        String tipo = cbTipoConsulta.getSelectedItem().toString();
+        txtID.setText("");
+        if (tipo.equals("ID")) {
+         txtID.setToolTipText("Digite o id do aluno");
+        } else if (tipo.equals("Nome")){
+          txtID.setToolTipText("Digite o nome ou parte dele");
+        } else if (tipo.equals("Turma")) {
+         txtID.setToolTipText("Digite a turma ou parte dela");
+        } else if (tipo.equals("E-mail")) {
+         txtID.setToolTipText("Digite o e-mail ou parte dele ");
+        } txtID.requestFocus();
+    }//GEN-LAST:event_cbTipoConsultaActionPerformed
 
    
     public static void main(String args[]) {
@@ -389,6 +427,7 @@ public class consultaAlunos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAlterar;
     private javax.swing.JButton bntAtualizar;
+    private javax.swing.JButton bntCarrregar;
     private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntFechar;
     private javax.swing.JButton bntLimpar;

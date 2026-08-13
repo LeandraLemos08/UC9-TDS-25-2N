@@ -165,7 +165,7 @@ public class Professor {
         
         switch (tipo){
             
-            case"ID":
+            case "ID":
                 sql = """
                       SELECT id, nome, disciplina, email, telefone FROM professores
                       WHERE id = ?

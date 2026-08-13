@@ -7,6 +7,12 @@ public class consultaProfessores extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(consultaProfessores.class.getName());
 
+  private void limparPesquisa(){
+    txtID.setText("");
+    cbTipoConsulta.setSelectedIndex(-1);
+    txtID.requestFocus();
+   }
+   
  
     public consultaProfessores() {
         initComponents();
@@ -114,6 +120,7 @@ public class consultaProfessores extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaProfessores = new javax.swing.JTable();
         txtTelefone = new javax.swing.JTextField();
+        bntRecarregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +137,7 @@ public class consultaProfessores extends javax.swing.JFrame {
         txtEmail.addActionListener(this::txtEmailActionPerformed);
 
         cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "Disciplina", "E-mail", "Telefone" }));
+        cbTipoConsulta.setSelectedIndex(-1);
 
         btnLocalizar.setText("🔎 Localizar");
         btnLocalizar.addActionListener(this::btnLocalizarActionPerformed);
@@ -170,6 +178,9 @@ public class consultaProfessores extends javax.swing.JFrame {
         txtTelefone.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Telefone do Professor:"));
         txtTelefone.addActionListener(this::txtTelefoneActionPerformed);
 
+        bntRecarregar.setText("🌀 Recarregar");
+        bntRecarregar.addActionListener(this::bntRecarregarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,6 +193,20 @@ public class consultaProfessores extends javax.swing.JFrame {
                         .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(bntAlterar)
+                        .addGap(28, 28, 28)
+                        .addComponent(bntExcluir)
+                        .addGap(29, 29, 29)
+                        .addComponent(bntAtualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntRecarregar)
+                        .addGap(29, 29, 29)
+                        .addComponent(bntLimpar)
+                        .addGap(38, 38, 38)
+                        .addComponent(bntFechar)
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -193,19 +218,7 @@ public class consultaProfessores extends javax.swing.JFrame {
                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLocalizar)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(bntAlterar)
-                        .addGap(28, 28, 28)
-                        .addComponent(bntExcluir)
-                        .addGap(29, 29, 29)
-                        .addComponent(bntAtualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bntLimpar)
-                        .addGap(38, 38, 38)
-                        .addComponent(bntFechar)
-                        .addGap(41, 41, 41))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,8 +249,9 @@ public class consultaProfessores extends javax.swing.JFrame {
                     .addComponent(bntExcluir)
                     .addComponent(bntAtualizar)
                     .addComponent(bntLimpar)
-                    .addComponent(bntFechar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(bntFechar)
+                    .addComponent(bntRecarregar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -245,7 +259,7 @@ public class consultaProfessores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
+     btnLocalizar.doClick();
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -394,6 +408,16 @@ public class consultaProfessores extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneActionPerformed
 
+    private void bntRecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRecarregarActionPerformed
+       Professor professor = new Professor();
+       
+       ArrayList<Professor> lista = professor.listar();
+       
+       preencherTabela(lista);
+       
+       limparPesquisa();
+    }//GEN-LAST:event_bntRecarregarActionPerformed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(() -> new consultaProfessores().setVisible(true));
@@ -405,6 +429,7 @@ public class consultaProfessores extends javax.swing.JFrame {
     private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntFechar;
     private javax.swing.JButton bntLimpar;
+    private javax.swing.JButton bntRecarregar;
     private javax.swing.JButton btnLocalizar;
     private javax.swing.JComboBox<String> cbTipoConsulta;
     private javax.swing.JScrollPane jScrollPane1;

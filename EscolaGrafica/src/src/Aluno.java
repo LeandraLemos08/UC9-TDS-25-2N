@@ -115,10 +115,10 @@ public class Aluno {
            while(resultado.next()){
            
                Aluno aluno = new Aluno();
-               aluno.setId(resultado.getInt(id));
-               aluno.setNome(resultado.getString(nome));
-               aluno.setTurma(resultado.getString(turma));
-               aluno.setEmail(resultado.getString(email));
+               aluno.setId(resultado.getInt("id"));
+               aluno.setNome(resultado.getString("nome"));
+               aluno.setTurma(resultado.getString("turma"));
+               aluno.setEmail(resultado.getString("email"));
                
                lista.add(aluno);
 }
@@ -186,9 +186,9 @@ public class Aluno {
         
         switch (tipo){
             
-            case"ID":
+            case "ID":
                 sql = """
-                      SELECT id, nome, turma,email FROM aluno
+                      SELECT id, nome, turma, email FROM aluno
                       WHERE id = ?
                       ORDER BY id
                       """;
@@ -203,7 +203,7 @@ public class Aluno {
                 break;
             case "Turma":
                 sql = """
-                      SELECT id, nome, turma,email FROM aluno
+                      SELECT id, nome, turma, email FROM aluno
                       WHERE turma ILIKE ?
                       ORDER BY turma, nome
                       """;
@@ -230,7 +230,7 @@ public class Aluno {
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
             
-            if (tipo.equals("Id")) {
+            if (tipo.equals("ID")) {
                int id = Integer.parseInt(valor);
                stmt.setInt(1,id);
             } else {
