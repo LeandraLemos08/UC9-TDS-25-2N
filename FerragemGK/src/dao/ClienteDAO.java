@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ClienteDAO {
 
@@ -455,12 +456,22 @@ public class ClienteDAO {
 
     switch (filtro) {
 
-        case "ID":
+        case "Codigo":
 
             sql =
                     "SELECT * "
                     + "FROM cliente "
                     + "WHERE id_cliente = ? "
+                    + "ORDER BY nome";
+
+            break;
+            
+            case "Nome":
+
+            sql =
+                    "SELECT * "
+                    + "FROM cliente "
+                    + "WHERE nome ILIKE ? "
                     + "ORDER BY nome";
 
             break;
@@ -475,7 +486,7 @@ public class ClienteDAO {
 
             break;
 
-        case "EMAIL":
+        case "E-mail":
 
             sql =
                     "SELECT * "
@@ -504,7 +515,7 @@ public class ClienteDAO {
                     conexao.prepareStatement(sql)
     ) {
 
-        if (filtro.equals("ID")) {
+        if (filtro.equals("Codigo")) {
 
             stmt.setLong(
                     1,
