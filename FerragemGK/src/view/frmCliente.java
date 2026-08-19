@@ -675,26 +675,26 @@ public class frmCliente extends javax.swing.JInternalFrame {
         cmbFiltrar.addActionListener(this::cmbFiltrarActionPerformed);
 
         txtPesquisa.setToolTipText("Escreva o nome de um cliente para pesquisa");
-        txtPesquisa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        txtPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Pesquisa:"));
         txtPesquisa.addActionListener(this::txtPesquisaActionPerformed);
 
-        btnLocalizar.setBackground(new java.awt.Color(153, 153, 153));
+        btnLocalizar.setBackground(new java.awt.Color(0, 153, 0));
         btnLocalizar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnLocalizar.setForeground(new java.awt.Color(255, 255, 255));
         btnLocalizar.setText("Localizar");
         btnLocalizar.addActionListener(this::btnLocalizarActionPerformed);
 
-        btnListarTodos.setBackground(new java.awt.Color(153, 153, 153));
+        btnListarTodos.setBackground(new java.awt.Color(0, 51, 255));
         btnListarTodos.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnListarTodos.setForeground(new java.awt.Color(255, 255, 255));
-        btnListarTodos.setText("Listar");
+        btnListarTodos.setText("Listar Todos");
         btnListarTodos.setToolTipText("Listar todos os clientes");
         btnListarTodos.addActionListener(this::btnListarTodosActionPerformed);
 
-        btnNovo.setBackground(new java.awt.Color(153, 153, 153));
+        btnNovo.setBackground(new java.awt.Color(51, 204, 255));
         btnNovo.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnNovo.setForeground(new java.awt.Color(255, 255, 255));
-        btnNovo.setText("Novo");
+        btnNovo.setText("Cadastro");
         btnNovo.setToolTipText("Carregar clientes");
         btnNovo.addActionListener(this::btnNovoActionPerformed);
 
@@ -716,7 +716,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabelaClientes);
 
-        btnCarregar1.setBackground(new java.awt.Color(153, 153, 153));
+        btnCarregar1.setBackground(new java.awt.Color(255, 204, 51));
         btnCarregar1.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnCarregar1.setForeground(new java.awt.Color(255, 255, 255));
         btnCarregar1.setText("Carregar");
@@ -727,25 +727,25 @@ public class frmCliente extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(cmbFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLocalizar))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCarregar1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(224, Short.MAX_VALUE)
-                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnListarTodos)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnListarTodos, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(126, 126, 126))
+                        .addComponent(btnCarregar1)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNovo)
+                    .addComponent(btnLocalizar))
+                .addGap(126, 180, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,18 +756,16 @@ public class frmCliente extends javax.swing.JInternalFrame {
                         .addComponent(cmbFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnLocalizar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnListarTodos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNovo))
-                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCarregar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLocalizar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCarregar1)
+                    .addComponent(btnListarTodos)
+                    .addComponent(btnNovo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tabCliente.addTab("Consulta", jPanel2);
