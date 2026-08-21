@@ -11,6 +11,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FornecedorDAO {
+    
+    public List<Fornecedor> listarAtivos() {
+
+    List<Fornecedor> fornecedores =
+            new ArrayList<>();
+
+    String sql =
+            "SELECT * "
+            + "FROM fornecedor "
+            + "WHERE ativo = TRUE "
+            + "ORDER BY razao_social";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql);
+
+            ResultSet rs =
+                    stmt.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            fornecedores.add(
+                    montarFornecedor(rs)
+            );
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao listar fornecedores ativos.",
+                erro
+        );
+    }
+
+    return fornecedores;
+}
+    
     private String textoOuNull(
         String texto
 ) {

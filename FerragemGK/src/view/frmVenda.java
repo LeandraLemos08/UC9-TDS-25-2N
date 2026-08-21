@@ -1,18 +1,195 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package view;
 
-/**
- *
- * @author LEANDRACRUZDELEMOS
- */
+import dao.ClienteDAO;
+import dao.ProdutoDAO;
+import dao.VendaDAO;
+
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
+
+import model.Cliente;
+import model.Produto;
+import model.ProdutoVenda;
+import model.Venda;
+
+import util.SessaoUsuario;
+
 public class frmVenda extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmVenda
-     */
+   private final VendaDAO vendaDAO =
+        new VendaDAO();
+
+    private final ClienteDAO clienteDAO =
+        new ClienteDAO();
+
+    private final ProdutoDAO produtoDAO =
+        new ProdutoDAO();
+
+    private final List<ProdutoVenda> itensVenda =
+        new ArrayList<>();
+
+    private final DecimalFormat formatoValor =
+        new DecimalFormat("#,##0.00");
+
+    private final DecimalFormat formatoQuantidade =
+        new DecimalFormat("#,##0.000");
+
+    private final DateTimeFormatter formatoData =
+        DateTimeFormatter.ofPattern(
+                "dd/MM/yyyy"
+        );
+
+    private BigDecimal valorTotal =
+        BigDecimal.ZERO;
+    
+    private void configurarTela() {
+
+    txtCodigoVenda.setEditable(
+            false
+    );
+
+    tblItens.setModel(
+            criarModeloTabela()
+    );
+
+    tblItens.setSelectionMode(
+            javax.swing.ListSelectionModel
+                    .SINGLE_SELECTION
+    );
+
+    spnParcelas.setModel(
+            new SpinnerNumberModel(
+                    2,
+                    2,
+                    24,
+                    1
+            )
+    );
+
+    rdbAvista.setSelected(
+            true
+    );
+
+    atualizarCamposPagamento();
+}
+    
+    private DefaultTableModel criarModeloTabela() {
+
+    return new DefaultTableModel(
+            new Object[]{
+                "Código",
+                "Produto",
+                "Quantidade",
+                "Valor Unitário",
+                "Subtotal"
+            },
+            0
+    ) {
+
+        @Override
+        public boolean isCellEditable(
+                int row,
+                int column
+        ) {
+
+            return false;
+        }
+    };
+}
+    
+    private void carregarClientes() {
+
+    try {
+
+        List<Cliente> clientes =
+                clienteDAO.listarAtivos();
+
+        DefaultComboBoxModel<Cliente> modelo =
+                new DefaultComboBoxModel<>();
+
+        for (
+                Cliente cliente :
+                clientes
+        ) {
+
+            modelo.addElement(
+                    cliente
+            );
+        }
+
+        cmbCliente.setModel(
+                modelo
+        );
+
+        cmbCliente.setSelectedItem(
+                null
+        );
+
+    } catch (Exception erro) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Erro ao carregar clientes.\n"
+                + erro.getMessage()
+        );
+    }
+}
+    
+    private void carregarProdutos() {
+
+    try {
+
+        List<Produto> produtos =
+                produtoDAO.listarAtivos();
+
+        DefaultComboBoxModel<Produto> modelo =
+                new DefaultComboBoxModel<>();
+
+        for (
+                Produto produto :
+                produtos
+        ) {
+
+            modelo.addElement(
+                    produto
+            );
+        }
+
+        cmbProduto.setModel(
+                modelo
+        );
+
+        cmbProduto.setSelectedItem(
+                null
+        );
+
+    } catch (Exception erro) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Erro ao carregar produtos.\n"
+                + erro.getMessage()
+        );
+    }
+}
+    
+    
+    
+    
     public frmVenda() {
         initComponents();
     }
@@ -26,21 +203,376 @@ public class frmVenda extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtCodigoVenda = new javax.swing.JTextField();
+        rdbAvista = new javax.swing.JRadioButton();
+        txtQuantidade = new javax.swing.JTextField();
+        rdbPrazo = new javax.swing.JRadioButton();
+        txtValorUnitario = new javax.swing.JTextField();
+        spnParcelas = new javax.swing.JSpinner();
+        txtVencimento = new javax.swing.JTextField();
+        btnNovaVenda = new javax.swing.JButton();
+        cmbCliente = new javax.swing.JComboBox<>();
+        btnCancelar = new javax.swing.JButton();
+        cmbProduto = new javax.swing.JComboBox<>();
+        btnFinalizarVenda = new javax.swing.JButton();
+        btnAdicionarProduto = new javax.swing.JButton();
+        btnRemoverProduto = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblItens = new javax.swing.JTable();
+        lblValorTotal = new javax.swing.JLabel();
+        lblEstoqueDisponivel = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Movimento de Vendas");
+
+        txtCodigoVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Código da Venda:"));
+
+        rdbAvista.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        rdbAvista.setText("À vista");
+        rdbAvista.addActionListener(this::rdbAvistaActionPerformed);
+
+        txtQuantidade.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Quantidade:"));
+        txtQuantidade.addActionListener(this::txtQuantidadeActionPerformed);
+
+        rdbPrazo.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        rdbPrazo.setText("A prazo");
+        rdbPrazo.addActionListener(this::rdbPrazoActionPerformed);
+
+        txtValorUnitario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Valor Unitário:"));
+        txtValorUnitario.addActionListener(this::txtValorUnitarioActionPerformed);
+
+        spnParcelas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Parcelas:"));
+
+        txtVencimento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Primeiro Vencimento:"));
+        txtVencimento.addActionListener(this::txtVencimentoActionPerformed);
+
+        btnNovaVenda.setBackground(new java.awt.Color(255, 102, 255));
+        btnNovaVenda.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        btnNovaVenda.setForeground(new java.awt.Color(255, 255, 255));
+        btnNovaVenda.setText("Nova Venda");
+        btnNovaVenda.addActionListener(this::btnNovaVendaActionPerformed);
+
+        cmbCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Cliente:"));
+        cmbCliente.addActionListener(this::cmbClienteActionPerformed);
+
+        btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
+        btnCancelar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
+
+        cmbProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Produto:"));
+        cmbProduto.addActionListener(this::cmbProdutoActionPerformed);
+
+        btnFinalizarVenda.setBackground(new java.awt.Color(102, 102, 255));
+        btnFinalizarVenda.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        btnFinalizarVenda.setForeground(new java.awt.Color(255, 255, 255));
+        btnFinalizarVenda.setText("Finalizar Venda");
+        btnFinalizarVenda.addActionListener(this::btnFinalizarVendaActionPerformed);
+
+        btnAdicionarProduto.setBackground(new java.awt.Color(102, 204, 255));
+        btnAdicionarProduto.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        btnAdicionarProduto.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdicionarProduto.setText("Adicionar Produto");
+        btnAdicionarProduto.addActionListener(this::btnAdicionarProdutoActionPerformed);
+
+        btnRemoverProduto.setBackground(new java.awt.Color(102, 255, 102));
+        btnRemoverProduto.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        btnRemoverProduto.setForeground(new java.awt.Color(255, 255, 255));
+        btnRemoverProduto.setText("Remover Produto");
+        btnRemoverProduto.addActionListener(this::btnRemoverProdutoActionPerformed);
+
+        tblItens.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblItens);
+
+        lblValorTotal.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        lblValorTotal.setText("Valor Total: R$");
+
+        lblEstoqueDisponivel.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
+        lblEstoqueDisponivel.setText("Estoque Disponível:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblValorTotal)
+                    .addComponent(spnParcelas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemoverProduto)
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNovaVenda)
+                                .addGap(73, 73, 73)
+                                .addComponent(btnFinalizarVenda))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rdbAvista)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdbPrazo)
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEstoqueDisponivel)
+                                    .addComponent(txtVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(55, 55, 55)
+                        .addComponent(btnCancelar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(btnAdicionarProduto)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionarProduto)
+                    .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValorTotal)
+                    .addComponent(btnRemoverProduto)
+                    .addComponent(lblEstoqueDisponivel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(spnParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdbAvista)
+                            .addComponent(rdbPrazo)))
+                    .addComponent(txtVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnFinalizarVenda)
+                    .addComponent(btnNovaVenda))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rdbAvistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAvistaActionPerformed
+        atualizarCamposPagamento();
+    }//GEN-LAST:event_rdbAvistaActionPerformed
+
+    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantidadeActionPerformed
+
+    private void rdbPrazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPrazoActionPerformed
+        atualizarCamposPagamento();
+    }//GEN-LAST:event_rdbPrazoActionPerformed
+
+    private void txtValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorUnitarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorUnitarioActionPerformed
+
+    private void txtVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVencimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVencimentoActionPerformed
+
+    private void btnNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaVendaActionPerformed
+        novaCompra();
+    }//GEN-LAST:event_btnNovaVendaActionPerformed
+
+    private void cmbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbClienteActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        int resposta =
+        JOptionPane.showConfirmDialog(
+            this,
+            "Deseja cancelar os dados desta compra?",
+            "Cancelar",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (
+            resposta
+            == JOptionPane.YES_OPTION
+        ) {
+
+            novaCompra();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProdutoActionPerformed
+    Produto produto =
+            (Produto)
+            cmbProduto.getSelectedItem();
+
+    if (produto != null) {
+
+        lblEstoqueDisponivel.setText(
+                formatoQuantidade.format(
+                        produto.getEstoque()
+                )
+        );
+
+        txtValorUnitario.setText(
+                produto
+                .getPrecoVenda()
+                .toPlainString()
+                .replace(".", ",")
+        );
+
+    } else {
+
+        lblEstoqueDisponivel.setText(
+                "0,000"
+        );
+
+        txtValorUnitario.setText(
+                ""
+        );
+    }
+    }//GEN-LAST:event_cmbProdutoActionPerformed
+
+    private void btnFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVendaActionPerformed
+        if (!validarCompra()) {
+
+            return;
+        }
+
+        int resposta =
+        JOptionPane.showConfirmDialog(
+            this,
+            "Deseja finalizar esta compra?",
+            "Finalizar Compra",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (
+            resposta
+            != JOptionPane.YES_OPTION
+        ) {
+
+            return;
+        }
+
+        try {
+
+            Compra compra =
+            criarCompra();
+
+            LocalDate primeiroVencimento =
+            obterPrimeiroVencimento();
+
+            long codigo =
+            compraDAO.finalizarCompra(
+                compra,
+                primeiroVencimento
+            );
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Compra finalizada com sucesso.\n"
+                + "Código: "
+                + codigo
+            );
+
+            novaCompra();
+
+            carregarProdutos();
+
+        } catch (Exception erro) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Não foi possível finalizar a compra.\n"
+                + erro.getMessage()
+            );
+        }
+    }//GEN-LAST:event_btnFinalizarVendaActionPerformed
+
+    private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
+        adicionarProduto();
+    }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
+
+    private void btnRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdutoActionPerformed
+        int linha =
+        tblItens.getSelectedRow();
+
+        if (linha < 0) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Selecione um produto da compra."
+            );
+
+            return;
+        }
+
+        itensCompra.remove(
+            linha
+        );
+
+        atualizarTabelaItens();
+
+        calcularTotal();
+    }//GEN-LAST:event_btnRemoverProdutoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionarProduto;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnFinalizarVenda;
+    private javax.swing.JButton btnNovaVenda;
+    private javax.swing.JButton btnRemoverProduto;
+    private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbProduto;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEstoqueDisponivel;
+    private javax.swing.JLabel lblValorTotal;
+    private javax.swing.JRadioButton rdbAvista;
+    private javax.swing.JRadioButton rdbPrazo;
+    private javax.swing.JSpinner spnParcelas;
+    private javax.swing.JTable tblItens;
+    private javax.swing.JTextField txtCodigoVenda;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValorUnitario;
+    private javax.swing.JTextField txtVencimento;
     // End of variables declaration//GEN-END:variables
 }

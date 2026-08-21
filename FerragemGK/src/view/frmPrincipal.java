@@ -191,7 +191,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuContasReceber = new javax.swing.JMenuItem();
         itemAjuda = new javax.swing.JMenu();
         mnuSobre = new javax.swing.JMenuItem();
-        mnuTeste = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -288,10 +287,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuSobre.addActionListener(this::mnuSobreActionPerformed);
         itemAjuda.add(mnuSobre);
 
-        mnuTeste.setText("Teste");
-        mnuTeste.addActionListener(this::mnuTesteActionPerformed);
-        itemAjuda.add(mnuTeste);
-
         jMenuBar1.add(itemAjuda);
 
         setJMenuBar(jMenuBar1);
@@ -357,12 +352,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_mnuUsuariosActionPerformed
 
-    private void mnuTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTesteActionPerformed
-    abrirTela(
-            new frmTeste()
-    );
-    }//GEN-LAST:event_mnuTesteActionPerformed
-
     private void itemCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCadastrosActionPerformed
 
     }//GEN-LAST:event_itemCadastrosActionPerformed
@@ -423,18 +412,18 @@ public class frmPrincipal extends javax.swing.JFrame {
     );
     }//GEN-LAST:event_mnuComprasActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       confirmarSaida();
+    }//GEN-LAST:event_formWindowClosing
+
     private void mnuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSobreActionPerformed
-       JOptionPane.showMessageDialog(
+        JOptionPane.showMessageDialog(
             this,
             "FerragemGK\n"
             + "Sistema desenvolvido em Java Swing\n"
             + "Banco de dados PostgreSQL"
-    );
+        );
     }//GEN-LAST:event_mnuSobreActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       confirmarSaida();
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -480,7 +469,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuProdutos;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JMenuItem mnuSobre;
-    private javax.swing.JMenuItem mnuTeste;
     private javax.swing.JMenuItem mnuUsuarios;
     private javax.swing.JMenuItem mnuVendas;
     // End of variables declaration//GEN-END:variables

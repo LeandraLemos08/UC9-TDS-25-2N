@@ -14,6 +14,48 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ClienteDAO {
+    
+    public List<Cliente> listarAtivos() {
+
+    List<Cliente> clientes =
+            new ArrayList<>();
+
+    String sql =
+            "SELECT * "
+            + "FROM cliente "
+            + "WHERE ativo = TRUE "
+            + "ORDER BY nome";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql);
+
+            ResultSet rs =
+                    stmt.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            clientes.add(
+                    montarCliente(rs)
+            );
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao listar clientes ativos.",
+                erro
+        );
+    }
+
+    return clientes;
+}
+    
+    
 
     public long cadastrar(
         Cliente cliente

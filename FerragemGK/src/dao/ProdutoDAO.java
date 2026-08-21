@@ -12,6 +12,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO {
+    
+    public List<Produto> listarAtivos() {
+
+    List<Produto> produtos =
+            new ArrayList<>();
+
+    String sql =
+            "SELECT * "
+            + "FROM produto "
+            + "WHERE ativo = TRUE "
+            + "ORDER BY descricao";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql);
+
+            ResultSet rs =
+                    stmt.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            produtos.add(
+                    montarProduto(rs)
+            );
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao listar produtos ativos.",
+                erro
+        );
+    }
+
+    return produtos;
+}
+    
+    
 public long cadastrar(
         Produto produto
 ) {

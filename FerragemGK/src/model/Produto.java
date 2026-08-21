@@ -13,6 +13,12 @@ public class Produto {
     private BigDecimal estoque;
     private BigDecimal estoqueMinimo;
     private boolean ativo;
+    
+    @Override
+    public String toString() {
+
+    return descricao;
+}
 
     public Produto() {
     }

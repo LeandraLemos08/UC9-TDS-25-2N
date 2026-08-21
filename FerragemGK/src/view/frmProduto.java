@@ -28,7 +28,15 @@ public class frmProduto extends javax.swing.JInternalFrame {
     
     
     public frmProduto() {
+        
         initComponents();
+        
+        configurarTela();
+
+        listarProdutos();
+
+        limparCampos();
+        
     }
 
   
@@ -224,7 +232,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         BigDecimal estoque =
                 converterDecimal(
-                        txtEstoque.getText()
+                        txtEstoqueAtual.getText()
                 );
 
         BigDecimal estoqueMinimo =

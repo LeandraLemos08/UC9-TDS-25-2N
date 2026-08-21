@@ -3,6 +3,12 @@ package model;
 
 public class Cliente {
 
+    @Override
+    public String toString() {
+
+    return nome;
+}
+    
     private long idCliente;
     private String nome;
     private String cpf;

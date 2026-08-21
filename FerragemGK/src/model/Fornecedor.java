@@ -17,6 +17,20 @@ public class Fornecedor {
     private String uf;
     private String cep;
     private boolean ativo;
+    
+    @Override
+   public String toString() {
+
+    if (
+            nomeFantasia != null
+            && !nomeFantasia.isBlank()
+    ) {
+
+        return nomeFantasia;
+    }
+
+    return razaoSocial;
+}
 
     public Fornecedor() {
     }
