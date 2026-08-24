@@ -373,35 +373,35 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         btnForSalvar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         btnForSalvar.setForeground(new java.awt.Color(255, 255, 255));
         btnForSalvar.setText("Salvar");
-        btnForSalvar.setToolTipText("Salvar alterações feitas no cadastro de um cliente");
+        btnForSalvar.setToolTipText("");
         btnForSalvar.addActionListener(this::btnForSalvarActionPerformed);
 
         btnForAlterar.setBackground(new java.awt.Color(255, 0, 51));
         btnForAlterar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         btnForAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnForAlterar.setText("Alterar");
-        btnForAlterar.setToolTipText("Alterar as informações de um cadastro de cliente");
+        btnForAlterar.setToolTipText("");
         btnForAlterar.addActionListener(this::btnForAlterarActionPerformed);
 
         btnForExcluir.setBackground(new java.awt.Color(204, 0, 0));
         btnForExcluir.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         btnForExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnForExcluir.setText("Excluir");
-        btnForExcluir.setToolTipText("Excluir um cadastro de cliente");
+        btnForExcluir.setToolTipText("");
         btnForExcluir.addActionListener(this::btnForExcluirActionPerformed);
 
         btnForCancelar.setBackground(new java.awt.Color(0, 255, 0));
         btnForCancelar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         btnForCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnForCancelar.setText("Cancelar");
-        btnForCancelar.setToolTipText("Cancelar tudo feito até agora");
+        btnForCancelar.setToolTipText("");
         btnForCancelar.addActionListener(this::btnForCancelarActionPerformed);
 
         btnForConsulta.setBackground(new java.awt.Color(255, 153, 153));
         btnForConsulta.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         btnForConsulta.setForeground(new java.awt.Color(255, 255, 255));
         btnForConsulta.setText("Consulta");
-        btnForConsulta.setToolTipText("Salvar alterações feitas no cadastro de um cliente");
+        btnForConsulta.setToolTipText("");
         btnForConsulta.addActionListener(this::btnForConsultaActionPerformed);
 
         txtNomeFantasia.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Nome Fantasia:"));
@@ -526,14 +526,14 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         btnForListarTodos.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnForListarTodos.setForeground(new java.awt.Color(255, 255, 255));
         btnForListarTodos.setText("Listar Todos");
-        btnForListarTodos.setToolTipText("Listar todos os clientes");
+        btnForListarTodos.setToolTipText("");
         btnForListarTodos.addActionListener(this::btnForListarTodosActionPerformed);
 
         btnNovoFornecedor.setBackground(new java.awt.Color(51, 204, 255));
         btnNovoFornecedor.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnNovoFornecedor.setForeground(new java.awt.Color(255, 255, 255));
         btnNovoFornecedor.setText("Cadastro");
-        btnNovoFornecedor.setToolTipText("Carregar clientes");
+        btnNovoFornecedor.setToolTipText("");
         btnNovoFornecedor.addActionListener(this::btnNovoFornecedorActionPerformed);
 
         tblFornecedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -558,7 +558,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         btnCarregarFornecedor.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnCarregarFornecedor.setForeground(new java.awt.Color(255, 255, 255));
         btnCarregarFornecedor.setText("Carregar");
-        btnCarregarFornecedor.setToolTipText("Carregar clientes");
+        btnCarregarFornecedor.setToolTipText("");
         btnCarregarFornecedor.addActionListener(this::btnCarregarFornecedorActionPerformed);
 
         cmbFiltrarFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Razao Social", "Nome Fantasia", "Codigo", "CNPJ", "Email" }));
@@ -601,7 +601,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(iConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCarregarFornecedor)
                     .addComponent(btnForListarTodos)
-                    .addComponent(btnNovoFornecedor))
+                    .addComponent(btnNovoFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -876,7 +876,8 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnForCancelarActionPerformed
 
     private void btnForConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForConsultaActionPerformed
-        // TODO add your handling code here:
+         limparCampos();
+        tabFornecedores.setSelectedIndex(1)   ;   
     }//GEN-LAST:event_btnForConsultaActionPerformed
 
     private void txtNomeFantasiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeFantasiaActionPerformed

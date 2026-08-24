@@ -447,7 +447,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Salvar"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Salvar altera&#xe7;&#xf5;es feitas no cadastro de um cliente"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForSalvarActionPerformed"/>
@@ -465,7 +465,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Alterar"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Alterar as informa&#xe7;&#xf5;es de um cadastro de cliente"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForAlterarActionPerformed"/>
@@ -483,7 +483,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Excluir"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Excluir um cadastro de cliente"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForExcluirActionPerformed"/>
@@ -501,7 +501,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Cancelar tudo feito at&#xe9; agora"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForCancelarActionPerformed"/>
@@ -519,7 +519,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Consulta"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Salvar altera&#xe7;&#xf5;es feitas no cadastro de um cliente"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForConsultaActionPerformed"/>
@@ -597,7 +597,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCarregarFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnForListarTodos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNovoFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnNovoFornecedor" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="33" max="32767" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="322" max="-2" attributes="0"/>
@@ -654,7 +654,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Listar Todos"/>
-                <Property name="toolTipText" type="java.lang.String" value="Listar todos os clientes"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForListarTodosActionPerformed"/>
@@ -672,7 +672,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastro"/>
-                <Property name="toolTipText" type="java.lang.String" value="Carregar clientes"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoFornecedorActionPerformed"/>
@@ -741,7 +741,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Carregar"/>
-                <Property name="toolTipText" type="java.lang.String" value="Carregar clientes"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCarregarFornecedorActionPerformed"/>

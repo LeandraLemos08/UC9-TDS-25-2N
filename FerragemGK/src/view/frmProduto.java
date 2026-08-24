@@ -531,6 +531,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         btnProCadastro.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
         btnProCadastro.setForeground(new java.awt.Color(255, 255, 255));
         btnProCadastro.setText("Cadastro");
+        btnProCadastro.addActionListener(this::btnProCadastroActionPerformed);
 
         btnProLocalizar.setBackground(new java.awt.Color(102, 204, 255));
         btnProLocalizar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 14)); // NOI18N
@@ -949,6 +950,11 @@ public class frmProduto extends javax.swing.JInternalFrame {
        limparCampos();
        
     }//GEN-LAST:event_bntProCancelarActionPerformed
+
+    private void btnProCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProCadastroActionPerformed
+       limparCampos();
+       tabProdutos.setSelectedIndex(0);
+    }//GEN-LAST:event_btnProCadastroActionPerformed
 
     private void carregarProdutoSelecionado() {
 

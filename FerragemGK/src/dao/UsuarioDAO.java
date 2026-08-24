@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UsuarioDAO {
 
     public Usuario autenticar(
@@ -73,4 +76,393 @@ public class UsuarioDAO {
 
         return null;
     }
+    
+    public long cadastrar(
+        Usuario usuario
+) {
+
+    String sql =
+            "INSERT INTO usuario ("
+            + "nome, "
+            + "login, "
+            + "senha, "
+            + "nivel, "
+            + "ativo"
+            + ") VALUES ("
+            + "?, ?, ?, ?, ?"
+            + ") "
+            + "RETURNING id_usuario";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql)
+    ) {
+
+        stmt.setString(
+                1,
+                usuario.getNome()
+        );
+
+        stmt.setString(
+                2,
+                usuario.getLogin()
+        );
+
+        stmt.setString(
+                3,
+                usuario.getSenha()
+        );
+
+        stmt.setString(
+                4,
+                usuario.getNivel()
+        );
+
+        stmt.setBoolean(
+                5,
+                usuario.isAtivo()
+        );
+
+        try (
+                ResultSet rs =
+                        stmt.executeQuery()
+        ) {
+
+            if (rs.next()) {
+
+                return rs.getLong(
+                        "id_usuario"
+                );
+            }
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao cadastrar usuário.",
+                erro
+        );
+    }
+
+    return 0;
+}
+    
+    private String textoOuNull(
+        String texto
+) {
+
+    if (
+            texto == null
+            || texto.trim().isEmpty()
+    ) {
+
+        return null;
+    }
+
+    return texto.trim();
+}
+    
+    public boolean alterar(
+        Usuario usuario
+) {
+
+    String sql =
+            "UPDATE usuario SET "
+            + "nome = ?, "
+            + "login = ?, "
+            + "senha = ?, "
+            + "nivel = ?, "
+            + "ativo = ? "
+            + "WHERE id_usuario = ?";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql)
+    ) {
+
+        stmt.setString(1, usuario.getNome());
+        stmt.setString(2, usuario.getLogin());
+        stmt.setString(3, usuario.getSenha());
+        stmt.setString(4, usuario.getNivel());
+        stmt.setBoolean(5, usuario.isAtivo());
+        stmt.setLong(6, usuario.getIdUsuario());
+
+        return stmt.executeUpdate() > 0;
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao alterar usuário.",
+                erro
+        );
+    }
+}
+    
+    public boolean excluir(
+        long idUsuario
+) {
+
+    String sql =
+            "DELETE FROM usuario "
+            + "WHERE id_usuario = ?";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql)
+    ) {
+
+        stmt.setLong(
+                1,
+                idUsuario
+        );
+
+        return stmt.executeUpdate() > 0;
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Não foi possível excluir o usuário.",
+                erro
+        );
+    }
+}
+    
+    public Usuario buscarPorId(
+        long idUsuario
+) {
+
+    String sql =
+            "SELECT * "
+            + "FROM usuario "
+            + "WHERE id_usuario = ?";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql)
+    ) {
+
+        stmt.setLong(
+                1,
+                idUsuario
+        );
+
+        try (
+                ResultSet rs =
+                        stmt.executeQuery()
+        ) {
+
+            if (rs.next()) {
+
+                return montarUsuario(rs);
+            }
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao localizar usuário.",
+                erro
+        );
+    }
+
+    return null;
+}
+    
+    private Usuario montarUsuario(
+        ResultSet rs
+) throws SQLException {
+
+    Usuario usuario =
+            new Usuario();
+
+    usuario.setIdUsuario(
+            rs.getLong("id_usuario")
+    );
+
+    usuario.setNome(
+            rs.getString("nome")
+    );
+
+    usuario.setLogin(
+            rs.getString("login")
+    );
+
+    usuario.setSenha(
+            rs.getString("senha")
+    );
+
+    usuario.setNivel(
+            rs.getString("nivel")
+    );
+
+    usuario.setAtivo(
+            rs.getBoolean("ativo")
+    );
+
+    return usuario;
+}
+    
+    public List<Usuario> listarTodos() {
+
+    List<Usuario> usuarios =
+            new ArrayList<>();
+
+    String sql =
+            "SELECT * "
+            + "FROM usuario "
+            + "ORDER BY nome";
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql);
+
+            ResultSet rs =
+                    stmt.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            usuarios.add(
+                    montarUsuario(rs)
+            );
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao listar usuários.",
+                erro
+        );
+    }
+
+    return usuarios;
+}
+    
+    public List<Usuario> pesquisar(
+        String filtro,
+        String pesquisa
+) {
+
+    List<Usuario> usuarios =
+            new ArrayList<>();
+
+    String sql;
+
+    switch (filtro) {
+        
+        case "Nome":
+
+            sql =
+                    "SELECT * "
+                    + "FROM usuario "
+                    + "WHERE nome ILIKE ? "
+                    + "ORDER BY nome";
+
+            break;
+
+
+        case "Codigo":
+
+            sql =
+                    "SELECT * "
+                    + "FROM usuario "
+                    + "WHERE id_usuario = ? "
+                    + "ORDER BY nome";
+
+            break;
+
+        case "Login":
+
+            sql =
+                    "SELECT * "
+                    + "FROM usuario "
+                    + "WHERE login ILIKE ? "
+                    + "ORDER BY nome";
+
+            break;
+
+        case "Nivel":
+
+            sql =
+                    "SELECT * "
+                    + "FROM usuario "
+                    + "WHERE nivel ILIKE ? "
+                    + "ORDER BY nome";
+
+            break;
+
+        default:
+
+            sql =
+                    "SELECT * "
+                    + "FROM usuario "
+                    + "WHERE nome ILIKE ? "
+                    + "ORDER BY nome";
+
+            break;
+    }
+
+    try (
+            Connection conexao =
+                    Conexao.conectar();
+
+            PreparedStatement stmt =
+                    conexao.prepareStatement(sql)
+    ) {
+
+        if (filtro.equals("ID")) {
+
+            stmt.setLong(
+                    1,
+                    Long.parseLong(pesquisa)
+            );
+
+        } else {
+
+            stmt.setString(
+                    1,
+                    "%"
+                    + pesquisa
+                    + "%"
+            );
+        }
+
+        try (
+                ResultSet rs =
+                        stmt.executeQuery()
+        ) {
+
+            while (rs.next()) {
+
+                usuarios.add(
+                        montarUsuario(rs)
+                );
+            }
+        }
+
+    } catch (SQLException erro) {
+
+        throw new RuntimeException(
+                "Erro ao pesquisar usuários.",
+                erro
+        );
+    }
+
+    return usuarios;
+}
 }
